@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>✨ My Cozy Dark Gallery ✨</title>
+    <style>
+        /* --- Reset + Base --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+            transition: background 0.3s, color 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* --- Themes --- */
+        body.dark {
+            background: #0a0a0a;
+            color: #f1f1f1;
+        }
+
+        body.light {
+            background: #ffffff;
+            color: #111111;
+        }
+
+        /* --- Header --- */
+        header {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, pink, purple, skyblue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            margin-top: 0.75rem;
+            font-size: 1.1rem;
+            color: inherit;
+            opacity: 0.7;
+        }
+
+        /* --- Toggles --- */
+        .toggles {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .toggle {
+            position: relative;
+            width: 110px;
+            height: 40px;
+            border-radius: 20px;
+            background: #222;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        body.light .toggle {
+            background: #e0e0e0;
+        }
+
+        .toggle span.slider {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 48px;
+            height: 32px;
+            border-radius: 16px;
+            background: purple;
+            transition: transform 0.3s;
+        }
+
+        .toggle span.slider.light {
+            background: gold;
+        }
+
+        .toggle .label {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: white;
+            font-weight: bold;
+            user-select: none;
+        }
+
+        .toggle .label.right {
+            right: 0;
+        }
+
+        /* --- Collapsible Section --- */
+        .about-btn {
+            margin-top: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: violet;
+            background: none;
+            border: none;
+        }
+
+        body.light .about-btn {
+            color: dodgerblue;
+        }
+
+        .about-content {
+            max-width: 600px;
+            margin: 1rem auto;
+            padding: 1rem;
+            border-radius: 12px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s, transform 0.3s;
+            display: none;
+        }
+
+        .about-content.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        body.dark .about-content {
+            background: #111;
+        }
+
+        body.light .about-content {
+            background: #f5f5f5;
+            color: #111;
+        }
+
+        .about-content p {
+            margin-top: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .about-content a {
+            color: hotpink;
+        }
+
+        /* --- Gallery --- */
+        .gallery {
+            flex-grow: 1;
+            display: grid;
+            gap: 1.5rem;
+            padding: 1.5rem;
+        }
+
+        /* Mobile: 1 column */
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr !important;
+                gap: 1rem;
+                padding: 1rem;
+            }
+        }
+
+        /* Tablet: 2 columns */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Desktop: 3+ columns */
+        @media (min-width: 1025px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        .card {
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        body.dark .card {
+            background: #111;
+        }
+
+        body.light .card {
+            background: #fafafa;
+            color: #111;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .card p {
+            text-align: center;
+            padding: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            opacity: 0.7;
+        }
+
+        footer a {
+            color: hotpink;
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <header>
+        <h1>✨ My Cozy Dark Gallery ✨</h1>
+        <p>A modern place for my drawings</p>
+
+        <div class="toggles">
+            <!-- Sort Toggle -->
+            <div id="sortToggle" class="toggle">
+                <span class="slider"></span>
+                <div class="label left">New</div>
+                <div class="label right">Old</div>
+            </div>
+
+            <!-- Theme Toggle -->
+            <div id="themeToggle" class="toggle">
+                <span class="slider light"></span>
+                <div class="label left">Dark</div>
+                <div class="label right">Light</div>
+            </div>
+        </div>
+
+        <!-- Collapsible Section -->
+        <button id="aboutBtn" class="about-btn">Show About Section ▼</button>
+        <div id="aboutContent" class="about-content">
+            <p>
+                Ironically, my Reddit username is <strong style="color:pink">LifeIsJustASickJoke</strong>,
+                yet here I am, drawing the cutest things I can. I guess contrast makes life interesting. 🌸
+            </p>
+            <p>And yes, believe it or not, I could even take commissions (don’t laugh too hard).</p>
+            <p>
+                You can find me on Reddit:
+                <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank">
+                    u/LifeIsJustASickJoke
+                </a>
+            </p>
+        </div>
+    </header>
+
+    <main class="gallery" id="gallery"></main>
+
+    <footer>
+        <p>© 2025 LifeIsJustASickJoke. All rights reserved.</p>
+        <p>
+            Contact me on Reddit:
+            <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank">
+                u/LifeIsJustASickJoke
+            </a>
+        </p>
+    </footer>
+
+    <script>
+        // --- State ---
+        let sortOrder = "latest";
+        let isDarkMode = true;
+        let isCollapsed = true;
+
+        const artworks = [
+            { id: 1, title: "Sunset Cat", image: "https://placehold.co/3000x2000" },
+            { id: 2, title: "Moonlit Forest", image: "https://placehold.co/3000x2000" },
+            { id: 3, title: "Cute Dragon", image: "https://placehold.co/3000x2000" },
+            { id: 4, title: "Mystic Mountain", image: "https://placehold.co/3000x2000" },
+            { id: 5, title: "Ocean Breeze", image: "https://placehold.co/3000x2000" },
+            { id: 6, title: "Starry Night", image: "https://placehold.co/3000x2000" }
+        ];
+
+        const gallery = document.getElementById("gallery");
+        const sortToggle = document.getElementById("sortToggle");
+        const themeToggle = document.getElementById("themeToggle");
+        const aboutBtn = document.getElementById("aboutBtn");
+        const aboutContent = document.getElementById("aboutContent");
+
+        // --- Render Gallery ---
+        function renderGallery() {
+            let sorted = [...artworks].sort((a, b) =>
+                sortOrder === "latest" ? b.id - a.id : a.id - b.id
+            );
+            gallery.innerHTML = "";
+            sorted.forEach((art, i) => {
+                const card = document.createElement("div");
+                card.className = "card";
+                card.style.opacity = "0";
+                card.style.transform = "translateY(20px)";
+                card.innerHTML = `
+          <a href="${art.image}" target="_blank">
+            <img src="${art.image}" alt="${art.title}">
+          </a>
+          <p>${art.title}</p>
+        `;
+                gallery.appendChild(card);
+                setTimeout(() => {
+                    card.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+                    card.style.opacity = "1";
+                    card.style.transform = "translateY(0)";
+                }, i * 100);
+            });
+        }
+
+        // --- Toggles ---
+        sortToggle.addEventListener("click", () => {
+            sortOrder = sortOrder === "latest" ? "oldest" : "latest";
+            const slider = sortToggle.querySelector(".slider");
+            slider.style.transform = sortOrder === "latest" ? "translateX(0)" : "translateX(58px)";
+            renderGallery();
+        });
+
+        themeToggle.addEventListener("click", () => {
+            isDarkMode = !isDarkMode;
+            document.body.className = isDarkMode ? "dark" : "light";
+            const slider = themeToggle.querySelector(".slider");
+            slider.style.transform = isDarkMode ? "translateX(0)" : "translateX(58px)";
+        });
+
+        aboutBtn.addEventListener("click", () => {
+            isCollapsed = !isCollapsed;
+            aboutBtn.textContent = isCollapsed ? "Show About Section ▼" : "Hide About Section ▲";
+            aboutContent.classList.toggle("show", !isCollapsed);
+        });
+
+        // --- Init ---
+        renderGallery();
+    </script>
+</body>
+
+</html>
