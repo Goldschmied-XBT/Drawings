@@ -4,375 +4,102 @@
 <head>
     <meta charset="UTF-8">
     <title>✨ My Cozy Dark Gallery ✨</title>
-    <style>
-        /* --- Reset + Base --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: sans-serif;
-            transition: background 0.3s, color 0.3s;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        /* --- Themes --- */
-        body.dark {
-            background: #0a0a0a;
-            color: #f1f1f1;
-        }
-
-        body.light {
-            background: #ffffff;
-            color: #111111;
-        }
-
-        /* --- Header --- */
-        header {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(to right, pink, purple, skyblue);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        header p {
-            margin-top: 0.75rem;
-            font-size: 1.1rem;
-            color: inherit;
-            opacity: 0.7;
-        }
-
-        /* --- Toggles --- */
-        .toggles {
-            margin-top: 1.5rem;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .toggle {
-            position: relative;
-            width: 110px;
-            height: 40px;
-            border-radius: 20px;
-            background: #222;
-            cursor: pointer;
-            overflow: hidden;
-        }
-
-        body.light .toggle {
-            background: #e0e0e0;
-        }
-
-        .toggle span.slider {
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            width: 48px;
-            height: 32px;
-            border-radius: 16px;
-            background: purple;
-            transition: transform 0.3s;
-        }
-
-        .toggle span.slider.light {
-            background: gold;
-        }
-
-        .toggle .label {
-            position: absolute;
-            width: 50%;
-            height: 100%;
-            top: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: bold;
-            user-select: none;
-        }
-
-        /* Dark mode labels */
-        body.dark .toggle .label {
-            color: white;
-        }
-
-        /* Light mode labels */
-        body.light .toggle .label {
-            color: black;
-        }
-
-        .toggle .label.right {
-            right: 0;
-        }
-
-        /* --- Collapsible Section --- */
-        .about-btn {
-            margin-top: 1.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-
-        body.dark .about-btn {
-            color: violet;
-        }
-
-        body.light .about-btn {
-            color: dodgerblue;
-        }
-
-        .about-content {
-            max-width: 600px;
-            margin: 1rem auto;
-            padding: 1rem;
-            border-radius: 12px;
-            border: 1px solid;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.3s, transform 0.3s;
-            display: none;
-        }
-
-        .about-content.show {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        body.dark .about-content {
-            background: #111;
-            border-color: #333;
-        }
-
-        body.light .about-content {
-            background: #f5f5f5;
-            border-color: #ccc;
-        }
-
-        .about-content p {
-            margin-top: 0.75rem;
-            line-height: 1.5;
-        }
-
-        .about-content a {
-            color: hotpink;
-        }
-
-        /* --- Gallery --- */
-        .gallery {
-            display: grid;
-            gap: 1.5rem;
-            padding: 1.5rem;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        }
-
-        /* Mobile: 1 image per row */
-        @media (max-width: 600px) {
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Tablet: 2 images per row */
-        @media (min-width: 601px) and (max-width: 900px) {
-            .gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Desktop: 3+ images per row */
-        @media (min-width: 901px) {
-            .gallery {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            }
-        }
-
-        .card {
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-        }
-
-        body.dark .card {
-            background: #111;
-            border-color: #333;
-        }
-
-        body.light .card {
-            background: #fafafa;
-            border-color: #ccc;
-        }
-
-        .card img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .card p {
-            text-align: center;
-            padding: 0.75rem;
-            font-weight: 500;
-        }
-
-        /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 1.5rem;
-            opacity: 0.7;
-        }
-
-        footer a {
-            color: hotpink;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="dark">
-    <header>
-        <h1>✨ My Cozy Dark Gallery ✨</h1>
-        <p>A modern place for my drawings</p>
+<body class="dark:bg-gray-900 dark:text-white bg-white text-gray-900 min-h-screen flex flex-col">
+    <header class="text-center p-8">
+        <h1 class="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-purple-600 to-blue-400">✨ My Cozy Dark Gallery ✨</h1>
+        <p class="mt-2 text-lg opacity-70">A modern place for my drawings</p>
 
-        <div class="toggles">
+        <div class="mt-6 flex justify-center gap-4">
             <!-- Sort Toggle -->
-            <div id="sortToggle" class="toggle">
-                <span class="slider"></span>
-                <div class="label left">New</div>
-                <div class="label right">Old</div>
-            </div>
-
-            <!-- Theme Toggle -->
-            <div id="themeToggle" class="toggle">
-                <span class="slider light"></span>
-                <div class="label left">Dark</div>
-                <div class="label right">Light</div>
+            <div id="sortToggle" class="relative w-28 h-12 rounded-full cursor-pointer bg-gray-700 overflow-hidden flex items-center">
+                <span id="sortSlider" class="absolute left-0 w-1/2 h-full bg-yellow-400 rounded-full transition-transform"></span>
+                <div class="absolute left-0 w-1/2 h-full flex items-center justify-center font-bold dark:text-white text-black pointer-events-none">New</div>
+                <div class="absolute right-0 w-1/2 h-full flex items-center justify-center font-bold dark:text-white text-black pointer-events-none">Old</div>
             </div>
         </div>
 
-        <!-- Collapsible Section -->
-        <button id="aboutBtn" class="about-btn">Show About Section ▼</button>
-        <div id="aboutContent" class="about-content">
-            <p>
-                Ironically, my Reddit username is <strong style="color:pink">LifeIsJustASickJoke</strong>,
-                yet here I am, drawing the cutest things I can. I guess contrast makes life interesting. 🌸
-            </p>
+        <button id="aboutBtn" class="mt-6 font-semibold cursor-pointer dark:text-white text-black px-0 py-0">Click for commission info 💌</button>
+        <div id="aboutContent" class="max-w-xl mx-auto mt-4 p-4 rounded-lg dark:bg-gray-800 bg-gray-100 hidden opacity-0 transition-all">
+            <p>Direct commissions are between $20 - $50 and can be paid via Revolut, PayPal, Bitcoin, On-chain Lightning, Monero — just send me a DM on Reddit.</p>
+            <p>Ironically, my Reddit username is <strong class="text-pink-400">LifeIsJustASickJoke</strong>, yet here I am, drawing the cutest things I can. I guess contrast makes life interesting. 🌸</p>
             <p>And yes, believe it or not, I could even take commissions (don’t laugh too hard).</p>
-            <p>
-                You can find me on Reddit:
-                <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank">
-                    u/LifeIsJustASickJoke
-                </a>
-            </p>
+            <p>You can find me on Reddit: <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" class="text-pink-500">u/LifeIsJustASickJoke</a></p>
         </div>
     </header>
 
-    <main class="gallery" id="gallery"></main>
+    <main id="gallery" class="grid gap-6 p-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"></main>
 
-    <footer>
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center opacity-0 pointer-events-none transition-opacity">
+        <span id="prev" class="absolute left-5 top-1/2 transform -translate-y-1/2 text-3xl text-white cursor-pointer select-none p-2">❮</span>
+        <img id="modalImage" class="max-w-[90%] max-h-[80%] rounded-lg" src="" alt="Large view">
+        <span id="next" class="absolute right-5 top-1/2 transform -translate-y-1/2 text-3xl text-white cursor-pointer select-none p-2">❯</span>
+    </div>
+
+    <footer class="text-center p-6 opacity-70">
         <p>© 2025 LifeIsJustASickJoke. All rights reserved.</p>
-        <p>
-            Contact me on Reddit:
-            <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank">
-                u/LifeIsJustASickJoke
-            </a>
-        </p>
+        <p>Contact me on Reddit: <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" class="text-pink-500">u/LifeIsJustASickJoke</a></p>
     </footer>
 
     <script>
-        // --- State ---
         let sortOrder = "latest";
-        let isDarkMode = true;
         let isCollapsed = true;
+        let currentIndex = 0;
 
         const artworks = [
-            { id: 1, title: "1", image: "https://placehold.co/3000x2000" },
-            { id: 2, title: "2", image: "https://placehold.co/3000x2000" },
-            { id: 3, title: "2", image: "https://placehold.co/3000x2000" },
-            { id: 4, title: "2", image: "https://placehold.co/3000x2000" },
-            { id: 5, title: "2", image: "https://placehold.co/3000x2000" },
-            { id: 6, title: "2", image: "https://placehold.co/3000x2000" },
-            { id: 7, title: "2", image: "https://placehold.co/3000x2000" },
-            { id: 8, title: "3", image: "https://placehold.co/3000x2000" }
+            { id:1, image:"https://placehold.co/3000x2000" },
+            { id:2, image:"https://placehold.co/3000x2000" },
+            { id:3, image:"https://placehold.co/3000x2000" },
+            { id:4, image:"https://placehold.co/3000x2000" },
+            { id:5, image:"https://placehold.co/3000x2000" },
+            { id:6, image:"https://placehold.co/3000x2000" },
+            { id:7, image:"https://placehold.co/3000x2000" },
+            { id:8, image:"https://placehold.co/3000x2000" }
         ];
 
         const gallery = document.getElementById("gallery");
         const sortToggle = document.getElementById("sortToggle");
-        const themeToggle = document.getElementById("themeToggle");
         const aboutBtn = document.getElementById("aboutBtn");
         const aboutContent = document.getElementById("aboutContent");
+        const modal = document.getElementById("modal");
+        const modalImage = document.getElementById("modalImage");
+        const prev = document.getElementById("prev");
+        const next = document.getElementById("next");
+        const sortSlider = document.getElementById("sortSlider");
 
-        // --- Render Gallery ---
         function renderGallery() {
-            let sorted = [...artworks].sort((a, b) =>
-                sortOrder === "latest" ? b.id - a.id : a.id - b.id
-            );
+            let sorted = [...artworks].sort((a,b) => sortOrder === "latest" ? b.id - a.id : a.id - b.id);
             gallery.innerHTML = "";
-            sorted.forEach((art, i) => {
+            sorted.forEach((art) => {
                 const card = document.createElement("div");
-                card.className = "card";
-                card.style.opacity = "0";
-                card.style.transform = "translateY(20px)";
-                card.innerHTML = `
-          <a href="${art.image}" target="_blank">
-            <img src="${art.image}" alt="${art.title}">
-          </a>
-          <p>${art.title}</p>
-        `;
+                card.className = "overflow-hidden cursor-pointer rounded-lg";
+                card.innerHTML = `<img src="${art.image}" alt="Artwork" class="w-full h-auto">`;
+                card.addEventListener("click", () => openModal(sorted, sorted.indexOf(art)));
                 gallery.appendChild(card);
-                setTimeout(() => {
-                    card.style.transition = "opacity 0.4s ease, transform 0.4s ease";
-                    card.style.opacity = "1";
-                    card.style.transform = "translateY(0)";
-                }, i * 100);
             });
         }
 
-        // --- Toggles ---
+        function openModal(images,index) { currentIndex = index; modalImage.src = images[currentIndex].image; modal.classList.add("opacity-100", "pointer-events-auto"); }
+        function showImage(offset) { const sorted = [...artworks].sort((a,b) => sortOrder === "latest" ? b.id - a.id : a.id - b.id); currentIndex = (currentIndex + offset + sorted.length) % sorted.length; modalImage.src = sorted[currentIndex].image; }
+        prev.addEventListener("click", () => showImage(-1));
+        next.addEventListener("click", () => showImage(1));
+        modal.addEventListener("click", (e) => { if(e.target === modal) modal.classList.remove("opacity-100", "pointer-events-auto"); });
+
         sortToggle.addEventListener("click", () => {
             sortOrder = sortOrder === "latest" ? "oldest" : "latest";
-            const slider = sortToggle.querySelector(".slider");
-            slider.style.transform = sortOrder === "latest" ? "translateX(0)" : "translateX(58px)";
+            sortSlider.style.transform = sortOrder === "latest" ? "translateX(0)" : "translateX(100%)";
             renderGallery();
         });
 
-        themeToggle.addEventListener("click", () => {
-            isDarkMode = !isDarkMode;
-            document.body.className = isDarkMode ? "dark" : "light";
-            const slider = themeToggle.querySelector(".slider");
-            slider.style.transform = isDarkMode ? "translateX(0)" : "translateX(58px)";
-        });
-
+        aboutBtn.addEventListener("mouseover", () => aboutBtn.style.cursor = 'pointer');
         aboutBtn.addEventListener("click", () => {
             isCollapsed = !isCollapsed;
-            aboutBtn.textContent = isCollapsed ? "Show About Section ▼" : "Hide About Section ▲";
-            aboutContent.classList.toggle("show", !isCollapsed);
+            aboutContent.classList.toggle("hidden", isCollapsed);
+            aboutContent.classList.toggle("opacity-100", !isCollapsed);
         });
 
-        // --- Init ---
         renderGallery();
     </script>
 </body>
