@@ -1,107 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>✨ My Cozy Dark Gallery ✨</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>✨ My Cozy Dark Gallery ✨</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="dark:bg-gray-900 dark:text-white bg-white text-gray-900 min-h-screen flex flex-col">
-    <header class="text-center p-8">
-        <h1 class="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-purple-600 to-blue-400">✨ My Cozy Dark Gallery ✨</h1>
-        <p class="mt-2 text-lg opacity-70">A modern place for my drawings</p>
+  <header class="text-center p-8">
+    <h1 class="text-4xl font-extrabold bg-clip-text text-transparent  pb-4 bg-gradient-to-r from-pink-400 via-purple-600 to-blue-400">Drawings by</h1>
+    <p class="mt-2 text-lg opacity-70"> <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" class="text-pink-500">u/LifeIsJustASickJoke</a></p>
 
-        <div class="mt-6 flex justify-center gap-4">
-            <!-- Sort Toggle -->
-            <div id="sortToggle" class="relative w-28 h-12 rounded-full cursor-pointer bg-gray-700 overflow-hidden flex items-center">
-                <span id="sortSlider" class="absolute left-0 w-1/2 h-full bg-yellow-400 rounded-full transition-transform"></span>
-                <div class="absolute left-0 w-1/2 h-full flex items-center justify-center font-bold dark:text-white text-black pointer-events-none">New</div>
-                <div class="absolute right-0 w-1/2 h-full flex items-center justify-center font-bold dark:text-white text-black pointer-events-none">Old</div>
-            </div>
-        </div>
-
-        <button id="aboutBtn" class="mt-6 font-semibold cursor-pointer dark:text-white text-black px-0 py-0">Click for commission info 💌</button>
-        <div id="aboutContent" class="max-w-xl mx-auto mt-4 p-4 rounded-lg dark:bg-gray-800 bg-gray-100 hidden opacity-0 transition-all">
-            <p>Direct commissions are between $20 - $50 and can be paid via Revolut, PayPal, Bitcoin, On-chain Lightning, Monero — just send me a DM on Reddit.</p>
-            <p>Ironically, my Reddit username is <strong class="text-pink-400">LifeIsJustASickJoke</strong>, yet here I am, drawing the cutest things I can. I guess contrast makes life interesting. 🌸</p>
-            <p>And yes, believe it or not, I could even take commissions (don’t laugh too hard).</p>
-            <p>You can find me on Reddit: <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" class="text-pink-500">u/LifeIsJustASickJoke</a></p>
-        </div>
-    </header>
-
-    <main id="gallery" class="grid gap-6 p-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"></main>
-
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center opacity-0 pointer-events-none transition-opacity">
-        <span id="prev" class="absolute left-5 top-1/2 transform -translate-y-1/2 text-3xl text-white cursor-pointer select-none p-2">❮</span>
-        <img id="modalImage" class="max-w-[90%] max-h-[80%] rounded-lg" src="" alt="Large view">
-        <span id="next" class="absolute right-5 top-1/2 transform -translate-y-1/2 text-3xl text-white cursor-pointer select-none p-2">❯</span>
+    <div class="mt-6 flex justify-center gap-4">
+      <!-- Sort Toggle -->
+      <div id="sortToggle" class="relative w-28 h-12 rounded-full cursor-pointer bg-gray-700 overflow-hidden flex items-center">
+        <span id="sortSlider" class="absolute left-0 w-1/2 h-full bg-yellow-400 rounded-full transition-transform"></span>
+        <div class="absolute left-0 w-1/2 h-full flex items-center justify-center font-bold dark:text-white text-black pointer-events-none">New</div>
+        <div class="absolute right-0 w-1/2 h-full flex items-center justify-center font-bold dark:text-white text-black pointer-events-none">Old</div>
+      </div>
     </div>
 
-    <footer class="text-center p-6 opacity-70">
-        <p>© 2025 LifeIsJustASickJoke. All rights reserved.</p>
-        <p>Contact me on Reddit: <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" class="text-pink-500">u/LifeIsJustASickJoke</a></p>
-    </footer>
+    <div class="mt-6 flex justify-center">
+      <div class="flex flex-col items-center">
+        <button id="aboutBtn" class="font-semibold flex items-center justify-center gap-2 cursor-pointer dark:text-white text-black px-0 py-0">
+          <span class="">Click for commission info</span>
+          <svg id="aboutArrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 transition-transform">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
 
-    <script>
-        let sortOrder = "latest";
-        let isCollapsed = true;
-        let currentIndex = 0;
+        <div id="aboutContent" class="max-w-xl mx-auto mt-4 p-4 rounded-lg dark:bg-gray-800 bg-gray-100 hidden opacity-0 transition-all text-left">
+          <p>Commissions are between $20 and $50 (Revolut, PayPal, Bitcoin (On-chain, Lightning) or Monero), just send me a DM on Reddit. <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" class="text-pink-500">u/LifeIsJustASickJoke</a></p>
+        </div>
+      </div>
+    </div>
+  </header>
 
-        const artworks = [
-            { id:1, image:"https://placehold.co/3000x2000" },
-            { id:2, image:"https://placehold.co/3000x2000" },
-            { id:3, image:"https://placehold.co/3000x2000" },
-            { id:4, image:"https://placehold.co/3000x2000" },
-            { id:5, image:"https://placehold.co/3000x2000" },
-            { id:6, image:"https://placehold.co/3000x2000" },
-            { id:7, image:"https://placehold.co/3000x2000" },
-            { id:8, image:"https://placehold.co/3000x2000" }
-        ];
+  <main id="gallery" class="grid gap-6 p-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-0"></main>
 
-        const gallery = document.getElementById("gallery");
-        const sortToggle = document.getElementById("sortToggle");
-        const aboutBtn = document.getElementById("aboutBtn");
-        const aboutContent = document.getElementById("aboutContent");
-        const modal = document.getElementById("modal");
-        const modalImage = document.getElementById("modalImage");
-        const prev = document.getElementById("prev");
-        const next = document.getElementById("next");
-        const sortSlider = document.getElementById("sortSlider");
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center opacity-0 pointer-events-none transition-opacity">
+    <span id="prev" class="absolute left-5 top-1/2 transform -translate-y-1/2 text-3xl text-white cursor-pointer select-none p-2">❮</span>
+    <img id="modalImage" class="max-w-[90%] max-h-[80%] rounded-lg" src="" alt="Large view">
+    <span id="next" class="absolute right-5 top-1/2 transform -translate-y-1/2 text-3xl text-white cursor-pointer select-none p-2">❯</span>
+  </div>
 
-        function renderGallery() {
-            let sorted = [...artworks].sort((a,b) => sortOrder === "latest" ? b.id - a.id : a.id - b.id);
-            gallery.innerHTML = "";
-            sorted.forEach((art) => {
-                const card = document.createElement("div");
-                card.className = "overflow-hidden cursor-pointer rounded-lg";
-                card.innerHTML = `<img src="${art.image}" alt="Artwork" class="w-full h-auto">`;
-                card.addEventListener("click", () => openModal(sorted, sorted.indexOf(art)));
-                gallery.appendChild(card);
-            });
-        }
+  <footer class="text-center p-6 opacity-70">
+    <p>© <span id="year"></span> LifeIsJustASickJoke. All rights reserved.</p>
+    <p>Contact me on Reddit: <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" class="text-pink-500">u/LifeIsJustASickJoke</a></p>
+  </footer>
 
-        function openModal(images,index) { currentIndex = index; modalImage.src = images[currentIndex].image; modal.classList.add("opacity-100", "pointer-events-auto"); }
-        function showImage(offset) { const sorted = [...artworks].sort((a,b) => sortOrder === "latest" ? b.id - a.id : a.id - b.id); currentIndex = (currentIndex + offset + sorted.length) % sorted.length; modalImage.src = sorted[currentIndex].image; }
-        prev.addEventListener("click", () => showImage(-1));
-        next.addEventListener("click", () => showImage(1));
-        modal.addEventListener("click", (e) => { if(e.target === modal) modal.classList.remove("opacity-100", "pointer-events-auto"); });
+  <script>
+    let sortOrder = "latest";
+    let isCollapsed = true;
+    let currentIndex = 0;
 
-        sortToggle.addEventListener("click", () => {
-            sortOrder = sortOrder === "latest" ? "oldest" : "latest";
-            sortSlider.style.transform = sortOrder === "latest" ? "translateX(0)" : "translateX(100%)";
-            renderGallery();
-        });
+    const artworks = [
+      { id:1, image:"https://placehold.co/3000x2000" },
+      { id:2, image:"https://placehold.co/3000x2000" },
+      { id:3, image:"https://placehold.co/3000x2000" },
+      { id:4, image:"https://placehold.co/3000x2000" },
+      { id:5, image:"https://placehold.co/3000x2000" },
+      { id:6, image:"https://placehold.co/3000x2000" },
+      { id:7, image:"https://placehold.co/3000x2000" },
+      { id:8, image:"https://placehold.co/3000x2000" }
+    ];
 
-        aboutBtn.addEventListener("mouseover", () => aboutBtn.style.cursor = 'pointer');
-        aboutBtn.addEventListener("click", () => {
-            isCollapsed = !isCollapsed;
-            aboutContent.classList.toggle("hidden", isCollapsed);
-            aboutContent.classList.toggle("opacity-100", !isCollapsed);
-        });
+    const gallery = document.getElementById("gallery");
+    const sortToggle = document.getElementById("sortToggle");
+    const aboutBtn = document.getElementById("aboutBtn");
+    const aboutContent = document.getElementById("aboutContent");
+    const aboutArrow = document.getElementById("aboutArrow");
+    const modal = document.getElementById("modal");
+    const modalImage = document.getElementById("modalImage");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+    const sortSlider = document.getElementById("sortSlider");
 
-        renderGallery();
-    </script>
+    function renderGallery() {
+      let sorted = [...artworks].sort((a,b) => sortOrder === "latest" ? b.id - a.id : a.id - b.id);
+      gallery.innerHTML = "";
+      sorted.forEach((art) => {
+        const card = document.createElement("div");
+        card.className = "overflow-hidden cursor-pointer rounded-lg";
+        card.innerHTML = `<img src="${art.image}" alt="Artwork" class="w-full h-auto">`;
+        card.addEventListener("click", () => openModal(sorted, sorted.indexOf(art)));
+        gallery.appendChild(card);
+      });
+    }
+
+    function openModal(images,index) { currentIndex = index; modalImage.src = images[currentIndex].image; modal.classList.add("opacity-100", "pointer-events-auto"); }
+    function showImage(offset) { const sorted = [...artworks].sort((a,b) => sortOrder === "latest" ? b.id - a.id : a.id - b.id); currentIndex = (currentIndex + offset + sorted.length) % sorted.length; modalImage.src = sorted[currentIndex].image; }
+    prev.addEventListener("click", () => showImage(-1));
+    next.addEventListener("click", () => showImage(1));
+    modal.addEventListener("click", (e) => { if(e.target === modal) modal.classList.remove("opacity-100", "pointer-events-auto"); });
+
+    sortToggle.addEventListener("click", () => {
+      sortOrder = sortOrder === "latest" ? "oldest" : "latest";
+      sortSlider.style.transform = sortOrder === "latest" ? "translateX(0)" : "translateX(100%)";
+      renderGallery();
+    });
+
+    aboutBtn.addEventListener("mouseover", () => aboutBtn.style.cursor = 'pointer');
+    aboutBtn.addEventListener("click", () => {
+      isCollapsed = !isCollapsed;
+      aboutContent.classList.toggle("hidden", isCollapsed);
+      aboutContent.classList.toggle("opacity-100", !isCollapsed);
+      aboutArrow.classList.toggle("rotate-180", !isCollapsed);
+    });
+
+    renderGallery();
+
+    // Auto-update copyright year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
-
 </html>
