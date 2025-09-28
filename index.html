@@ -6,31 +6,44 @@
   <title>Drawings by LifeIsJustASickJoke</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="dark:bg-gray-900 dark:text-white bg-white text-gray-900 min-h-screen flex flex-col">
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
   <header class="text-center p-8">
-    <h1 class="text-4xl font-extrabold bg-clip-text text-transparent  pb-4 bg-gradient-to-r from-pink-400 via-purple-600 to-blue-400">Drawings by</h1>
-    <p class="text-lg opacity-70"> <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" class="text-pink-500">u/LifeIsJustASickJoke</a></p>
+    <h1 class="text-4xl font-extrabold bg-clip-text text-transparent pb-4 bg-gradient-to-r from-indigo-400 via-purple-500 to-cyan-400">
+      Drawings by
+    </h1>
+    <p class="text-lg text-gray-300">
+      <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" 
+         class="text-blue-400 underline hover:text-blue-300">
+        u/LifeIsJustASickJoke
+      </a>
+    </p>
 
     <div class="mt-6 flex justify-center gap-4">
       <!-- Sort Toggle -->
       <div id="sortToggle" class="relative w-28 h-12 rounded-full cursor-pointer bg-gray-700 overflow-hidden flex items-center">
-        <span id="sortSlider" class="absolute left-0 w-1/2 h-full bg-yellow-400 rounded-full transition-transform"></span>
-        <div class="absolute left-0 w-1/2 h-full flex items-center justify-center font-bold dark:text-white text-black pointer-events-none">New</div>
-        <div class="absolute right-0 w-1/2 h-full flex items-center justify-center font-bold dark:text-white text-black pointer-events-none">Old</div>
+        <span id="sortSlider" class="absolute left-0 w-1/2 h-full bg-indigo-500 rounded-full transition-transform"></span>
+        <div class="absolute left-0 w-1/2 h-full flex items-center justify-center font-bold text-white pointer-events-none">New</div>
+        <div class="absolute right-0 w-1/2 h-full flex items-center justify-center font-bold text-white pointer-events-none">Old</div>
       </div>
     </div>
 
     <div class="mt-6 flex justify-center">
       <div class="flex flex-col items-center">
-        <button id="aboutBtn" class="font-semibold flex items-center justify-center gap-2 cursor-pointer dark:text-white text-black px-0 py-0">
-          <span class="">Click for commission info</span>
+        <button id="aboutBtn" class="font-semibold flex items-center justify-center gap-2 cursor-pointer px-0 py-0 text-white hover:text-gray-300">
+          <span>Click for commission info</span>
           <svg id="aboutArrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 transition-transform">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
 
-        <div id="aboutContent" class="max-w-xl mx-auto mt-4 p-4 rounded-lg dark:bg-gray-800 bg-gray-100 hidden opacity-0 transition-all text-left">
-          <p>Commissions are between $20 and $50 (Revolut, PayPal, Bitcoin (On-chain, Lightning) or Monero), just send me a DM on Reddit. <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" class="text-pink-500">u/LifeIsJustASickJoke</a></p>
+        <div id="aboutContent" class="max-w-xl mx-auto mt-4 p-4 rounded-lg bg-gray-800 hidden opacity-0 transition-all text-left">
+          <p class="text-gray-300">
+            Commissions are between $20 and $50 (Revolut, PayPal, Bitcoin (On-chain, Lightning) or Monero), just send me a DM on Reddit. 
+            <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" 
+               class="text-blue-400 underline hover:text-blue-300">
+              u/LifeIsJustASickJoke
+            </a>
+          </p>
         </div>
       </div>
     </div>
@@ -39,14 +52,18 @@
   <main id="gallery" class="grid gap-6 p-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-0"></main>
 
   <div id="modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center opacity-0 pointer-events-none transition-opacity">
-    <span id="prev" class="absolute left-5 top-1/2 transform -translate-y-1/2 text-3xl text-white cursor-pointer select-none p-2">❮</span>
+    <span id="prev" class="absolute left-5 top-1/2 transform -translate-y-1/2 text-3xl cursor-pointer select-none p-2">❮</span>
     <img id="modalImage" class="max-w-[90%] max-h-[80%] rounded-lg" src="" alt="Large view">
-    <span id="next" class="absolute right-5 top-1/2 transform -translate-y-1/2 text-3xl text-white cursor-pointer select-none p-2">❯</span>
+    <span id="next" class="absolute right-5 top-1/2 transform -translate-y-1/2 text-3xl cursor-pointer select-none p-2">❯</span>
   </div>
 
-  <footer class="text-center p-6 opacity-70">
-    <p>© <span id="year"></span> LifeIsJustASickJoke. All rights reserved.</p>
-    <p>Contact me on Reddit: <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" class="text-pink-500">u/LifeIsJustASickJoke</a></p>
+  <footer class="text-center p-6 text-gray-400">
+    <p>© <span id="year"></span> 
+      <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" 
+         class="text-blue-400 underline hover:text-blue-300">
+        u/LifeIsJustASickJoke
+      </a>
+    </p>
   </footer>
 
   <script>
@@ -54,27 +71,27 @@
     let isCollapsed = true;
     let currentIndex = 0;
 
-   const artworks = [
-        { id: 1, image: "drawings/Drawing1.png" },
-        { id: 2, image: "drawings/Drawing2.png" },
-        { id: 4, image: "drawings/Drawing4.png" },
-        { id: 3, image: "drawings/Drawing3.png" },
-        { id: 5, image: "drawings/Drawing5.png" },
-        { id: 6, image: "drawings/Drawing6.png" },
-        { id: 7, image: "drawings/Drawing7.png" },
-        { id: 8, image: "drawings/Drawing8.png" },
-        { id: 9, image: "drawings/Drawing9.png" },
-        { id: 10, image: "drawings/Drawing10.png" },
-        { id: 11, image: "drawings/Drawing11.png" },
-        { id: 12, image: "drawings/Drawing12.png" },
-        { id: 13, image: "drawings/Drawing13.png" },
-        { id: 14, image: "drawings/Drawing14.png" },
-        { id: 15, image: "drawings/Drawing15.png" },
-        { id: 16, image: "drawings/Drawing16.png" },
-        { id: 17, image: "drawings/Drawing17.png" },
-        { id: 18, image: "drawings/Drawing18.png" },
-        { id: 19, image: "drawings/Drawing19.png" },
-        { id: 20, image: "drawings/Drawing20.png" }
+    const artworks = [
+      { id: 1, image: "drawings/Drawing1.png" },
+      { id: 2, image: "drawings/Drawing2.png" },
+      { id: 4, image: "drawings/Drawing4.png" },
+      { id: 3, image: "drawings/Drawing3.png" },
+      { id: 5, image: "drawings/Drawing5.png" },
+      { id: 6, image: "drawings/Drawing6.png" },
+      { id: 7, image: "drawings/Drawing7.png" },
+      { id: 8, image: "drawings/Drawing8.png" },
+      { id: 9, image: "drawings/Drawing9.png" },
+      { id: 10, image: "drawings/Drawing10.png" },
+      { id: 11, image: "drawings/Drawing11.png" },
+      { id: 12, image: "drawings/Drawing12.png" },
+      { id: 13, image: "drawings/Drawing13.png" },
+      { id: 14, image: "drawings/Drawing14.png" },
+      { id: 15, image: "drawings/Drawing15.png" },
+      { id: 16, image: "drawings/Drawing16.png" },
+      { id: 17, image: "drawings/Drawing17.png" },
+      { id: 18, image: "drawings/Drawing18.png" },
+      { id: 19, image: "drawings/Drawing19.png" },
+      { id: 20, image: "drawings/Drawing20.png" }
     ];
 
     const gallery = document.getElementById("gallery");
@@ -100,11 +117,23 @@
       });
     }
 
-    function openModal(images,index) { currentIndex = index; modalImage.src = images[currentIndex].image; modal.classList.add("opacity-100", "pointer-events-auto"); }
-    function showImage(offset) { const sorted = [...artworks].sort((a,b) => sortOrder === "latest" ? b.id - a.id : a.id - b.id); currentIndex = (currentIndex + offset + sorted.length) % sorted.length; modalImage.src = sorted[currentIndex].image; }
+    function openModal(images,index) { 
+      currentIndex = index; 
+      modalImage.src = images[currentIndex].image; 
+      modal.classList.add("opacity-100", "pointer-events-auto"); 
+    }
+
+    function showImage(offset) { 
+      const sorted = [...artworks].sort((a,b) => sortOrder === "latest" ? b.id - a.id : a.id - b.id); 
+      currentIndex = (currentIndex + offset + sorted.length) % sorted.length; 
+      modalImage.src = sorted[currentIndex].image; 
+    }
+
     prev.addEventListener("click", () => showImage(-1));
     next.addEventListener("click", () => showImage(1));
-    modal.addEventListener("click", (e) => { if(e.target === modal) modal.classList.remove("opacity-100", "pointer-events-auto"); });
+    modal.addEventListener("click", (e) => { 
+      if(e.target === modal) modal.classList.remove("opacity-100", "pointer-events-auto"); 
+    });
 
     sortToggle.addEventListener("click", () => {
       sortOrder = sortOrder === "latest" ? "oldest" : "latest";
@@ -122,7 +151,6 @@
 
     renderGallery();
 
-    // Auto-update copyright year
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
