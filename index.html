@@ -6,13 +6,16 @@
   <title>Drawings by LifeIsJustASickJoke</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-900 text-white min-h-screen flex flex-col">
+
   <header class="text-center p-8">
     <h1 class="text-4xl font-extrabold bg-clip-text text-transparent pb-4 bg-gradient-to-r from-indigo-400 via-purple-500 to-cyan-400">
       Drawings by
     </h1>
+
     <p class="text-lg text-gray-300">
-      <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" 
+      <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank"
          class="text-blue-400 underline hover:text-blue-300">
         u/LifeIsJustASickJoke
       </a>
@@ -20,46 +23,48 @@
 
     <div class="mt-6 flex justify-center gap-4">
       <!-- Sort Toggle -->
-      <div id="sortToggle" class="relative w-28 h-12 rounded-full cursor-pointer bg-gray-700 overflow-hidden flex items-center">
-        <span id="sortSlider" class="absolute left-0 w-1/2 h-full bg-indigo-500 rounded-full transition-transform"></span>
-        <div class="absolute left-0 w-1/2 h-full flex items-center justify-center font-bold text-white pointer-events-none">New</div>
-        <div class="absolute right-0 w-1/2 h-full flex items-center justify-center font-bold text-white pointer-events-none">Old</div>
-      </div>
-    </div>
+      <div id="sortToggle"
+           class="relative w-28 h-12 rounded-full cursor-pointer bg-gray-700 overflow-hidden flex items-center">
+        <span id="sortSlider"
+              class="absolute left-0 w-1/2 h-full bg-indigo-500 rounded-full transition-transform"></span>
 
-    <div class="mt-6 flex justify-center">
-      <div class="flex flex-col items-center">
-        <button id="aboutBtn" class="font-semibold flex items-center justify-center gap-2 cursor-pointer px-0 py-0 text-white hover:text-gray-300">
-          <span>Click for commission info</span>
-          <svg id="aboutArrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 transition-transform">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-
-        <div id="aboutContent" class="max-w-xl mx-auto mt-4 p-4 rounded-lg bg-gray-800 hidden opacity-0 transition-all text-left">
-          <p class="text-gray-300">
-            Commissions are between $20 and $50 (Revolut, PayPal, Bitcoin (On-chain, Lightning) or Monero), just send me a DM on Reddit. 
-            <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" 
-               class="text-blue-400 underline hover:text-blue-300">
-              u/LifeIsJustASickJoke
-            </a>
-          </p>
+        <div class="absolute left-0 w-1/2 h-full flex items-center justify-center font-bold text-white pointer-events-none">
+          New
+        </div>
+        <div class="absolute right-0 w-1/2 h-full flex items-center justify-center font-bold text-white pointer-events-none">
+          Old
         </div>
       </div>
     </div>
   </header>
 
-  <main id="gallery" class="grid gap-6 p-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-0"></main>
+  <main id="gallery"
+        class="grid gap-6 p-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-0">
+  </main>
 
-  <div id="modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center opacity-0 pointer-events-none transition-opacity">
-    <span id="prev" class="absolute left-5 top-1/2 transform -translate-y-1/2 text-3xl cursor-pointer select-none p-2">❮</span>
-    <img id="modalImage" class="max-w-[90%] max-h-[80%] rounded-lg" src="" alt="Large view">
-    <span id="next" class="absolute right-5 top-1/2 transform -translate-y-1/2 text-3xl cursor-pointer select-none p-2">❯</span>
+  <!-- Modal -->
+  <div id="modal"
+       class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center opacity-0 pointer-events-none transition-opacity">
+    <span id="prev"
+          class="absolute left-5 top-1/2 -translate-y-1/2 text-3xl cursor-pointer select-none p-2">
+      ❮
+    </span>
+
+    <img id="modalImage"
+         class="max-w-[90%] max-h-[80%] rounded-lg"
+         src=""
+         alt="Large view">
+
+    <span id="next"
+          class="absolute right-5 top-1/2 -translate-y-1/2 text-3xl cursor-pointer select-none p-2">
+      ❯
+    </span>
   </div>
 
   <footer class="text-center p-6 text-gray-400">
-    <p>© <span id="year"></span> 
-      <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank" 
+    <p>
+      © <span id="year"></span>
+      <a href="https://www.reddit.com/user/LifeIsJustASickJoke" target="_blank"
          class="text-blue-400 underline hover:text-blue-300">
         u/LifeIsJustASickJoke
       </a>
@@ -68,14 +73,13 @@
 
   <script>
     let sortOrder = "latest";
-    let isCollapsed = true;
     let currentIndex = 0;
 
     const artworks = [
       { id: 1, image: "drawings/Drawing1.png" },
       { id: 2, image: "drawings/Drawing2.png" },
-      { id: 4, image: "drawings/Drawing4.png" },
       { id: 3, image: "drawings/Drawing3.png" },
+      { id: 4, image: "drawings/Drawing4.png" },
       { id: 5, image: "drawings/Drawing5.png" },
       { id: 6, image: "drawings/Drawing6.png" },
       { id: 7, image: "drawings/Drawing7.png" },
@@ -92,67 +96,69 @@
       { id: 18, image: "drawings/Drawing18.png" },
       { id: 19, image: "drawings/Drawing19.png" },
       { id: 20, image: "drawings/Drawing20.png" },
-      { id: 21, image: "drawings/Drawing21.png" }
+      { id: 21, image: "drawings/Drawing21.png" },
+      { id: 22, image: "drawings/Drawing22.png" }
     ];
 
     const gallery = document.getElementById("gallery");
     const sortToggle = document.getElementById("sortToggle");
-    const aboutBtn = document.getElementById("aboutBtn");
-    const aboutContent = document.getElementById("aboutContent");
-    const aboutArrow = document.getElementById("aboutArrow");
+    const sortSlider = document.getElementById("sortSlider");
     const modal = document.getElementById("modal");
     const modalImage = document.getElementById("modalImage");
     const prev = document.getElementById("prev");
     const next = document.getElementById("next");
-    const sortSlider = document.getElementById("sortSlider");
 
     function renderGallery() {
-      let sorted = [...artworks].sort((a,b) => sortOrder === "latest" ? b.id - a.id : a.id - b.id);
+      const sorted = [...artworks].sort((a, b) =>
+        sortOrder === "latest" ? b.id - a.id : a.id - b.id
+      );
+
       gallery.innerHTML = "";
-      sorted.forEach((art) => {
+
+      sorted.forEach((art, index) => {
         const card = document.createElement("div");
         card.className = "overflow-hidden cursor-pointer rounded-lg";
         card.innerHTML = `<img src="${art.image}" alt="Artwork" class="w-full h-auto">`;
-        card.addEventListener("click", () => openModal(sorted, sorted.indexOf(art)));
+
+        card.addEventListener("click", () => openModal(sorted, index));
         gallery.appendChild(card);
       });
     }
 
-    function openModal(images,index) { 
-      currentIndex = index; 
-      modalImage.src = images[currentIndex].image; 
-      modal.classList.add("opacity-100", "pointer-events-auto"); 
+    function openModal(images, index) {
+      currentIndex = index;
+      modalImage.src = images[currentIndex].image;
+      modal.classList.add("opacity-100", "pointer-events-auto");
     }
 
-    function showImage(offset) { 
-      const sorted = [...artworks].sort((a,b) => sortOrder === "latest" ? b.id - a.id : a.id - b.id); 
-      currentIndex = (currentIndex + offset + sorted.length) % sorted.length; 
-      modalImage.src = sorted[currentIndex].image; 
+    function showImage(offset) {
+      const sorted = [...artworks].sort((a, b) =>
+        sortOrder === "latest" ? b.id - a.id : a.id - b.id
+      );
+
+      currentIndex = (currentIndex + offset + sorted.length) % sorted.length;
+      modalImage.src = sorted[currentIndex].image;
     }
 
     prev.addEventListener("click", () => showImage(-1));
     next.addEventListener("click", () => showImage(1));
-    modal.addEventListener("click", (e) => { 
-      if(e.target === modal) modal.classList.remove("opacity-100", "pointer-events-auto"); 
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("opacity-100", "pointer-events-auto");
+      }
     });
 
     sortToggle.addEventListener("click", () => {
       sortOrder = sortOrder === "latest" ? "oldest" : "latest";
-      sortSlider.style.transform = sortOrder === "latest" ? "translateX(0)" : "translateX(100%)";
+      sortSlider.style.transform =
+        sortOrder === "latest" ? "translateX(0)" : "translateX(100%)";
       renderGallery();
     });
 
-    aboutBtn.addEventListener("mouseover", () => aboutBtn.style.cursor = 'pointer');
-    aboutBtn.addEventListener("click", () => {
-      isCollapsed = !isCollapsed;
-      aboutContent.classList.toggle("hidden", isCollapsed);
-      aboutContent.classList.toggle("opacity-100", !isCollapsed);
-      aboutArrow.classList.toggle("rotate-180", !isCollapsed);
-    });
-
     renderGallery();
-
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>
