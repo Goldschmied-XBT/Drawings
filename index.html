@@ -31,6 +31,110 @@
       </a>
     </p>
 
+<!-- TERMINAL INFO BOX -->
+<section class="pt-6">
+  <div class="max-w-5xl mx-auto">
+
+    <!-- TOGGLE -->
+    <button id="infoToggle"
+            class="w-full flex items-center justify-center gap-2 py-4 text-red-500 hover:text-red-300 transition font-mono">
+
+      <span id="infoTitle">show /collection</span>
+      <span class="text-red-800">▾</span>
+
+    </button>
+
+    <!-- TERMINAL WINDOW -->
+    <div id="infoContent"
+         class="hidden bg-black border border-red-900 rounded-xl shadow-xl px-6 pt-5 pb-6 font-mono text-sm leading-relaxed">
+
+      <!-- HEADER -->
+      <div class="text-red-400">
+        user@archive:~/collection
+      </div>
+
+      <div class="text-gray-600 mb-4">
+        ─────────────────────────────
+      </div>
+
+      <!-- GRID -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300">
+
+        <!-- TEXT -->
+        <div class="border border-gray-800 rounded-lg p-3">
+          <div class="text-red-400 mb-2">/text</div>
+          <a href="#" class="block hover:text-red-400">text_01.log</a>
+          <a href="#" class="block hover:text-red-400">text_02.log</a>
+          <a href="#" class="block hover:text-red-400">text_03.log</a>
+        </div>
+
+        <!-- AUDIO -->
+        <div class="border border-gray-800 rounded-lg p-3">
+          <div class="text-red-400 mb-2">/audio</div>
+          <a href="#" class="block hover:text-red-400">audio_01.wav</a>
+          <a href="#" class="block hover:text-red-400">audio_02.wav</a>
+          <a href="#" class="block hover:text-red-400">audio_03.wav</a>
+        </div>
+
+        <!-- IMAGES -->
+        <div class="border border-gray-800 rounded-lg p-3">
+          <div class="text-red-400 mb-2">/images</div>
+          <a href="#" class="block hover:text-red-400">image_01.png</a>
+          <a href="#" class="block hover:text-red-400">image_02.png</a>
+          <a href="#" class="block hover:text-red-400">image_03.png</a>
+        </div>
+
+        <!-- VIDEO -->
+        <div class="border border-gray-800 rounded-lg p-3">
+          <div class="text-red-400 mb-2">/video</div>
+          <a href="#" class="block hover:text-red-400">video_01.mp4</a>
+          <a href="#" class="block hover:text-red-400">video_02.mp4</a>
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div class="text-gray-600 mt-4">
+        ─────────────────────────────
+      </div>
+
+      <div class="text-gray-500 text-xs">
+        click files to open | show /collection to toggle
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<script>
+/* =========================
+   INFO BOX TOGGLE
+========================= */
+
+const infoToggle = document.getElementById("infoToggle");
+const infoContent = document.getElementById("infoContent");
+const infoTitle = document.getElementById("infoTitle");
+const infoArrow = document.getElementById("infoArrow");
+
+let infoOpen = false; // CLOSED by default
+
+infoToggle.addEventListener("click", () => {
+  infoOpen = !infoOpen;
+
+  if (infoOpen) {
+    infoContent.classList.remove("hidden");
+    infoTitle.textContent = "Hide information";
+    infoArrow.style.transform = "rotate(180deg)";
+  } else {
+    infoContent.classList.add("hidden");
+    infoTitle.textContent = "Show information";
+    infoArrow.style.transform = "rotate(0deg)";
+  }
+});
+</script>
+
     <!-- SORT TOGGLE -->
     <div class="mt-6 flex justify-center gap-4">
 
@@ -88,6 +192,8 @@
 
 let sortOrder = "latest";
 let currentIndex = 0;
+
+
 
 /* =========================
    DATA
